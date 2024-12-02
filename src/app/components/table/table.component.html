@@ -1,0 +1,33 @@
+<div class="pokemon-table-container">
+  <button mat-raised-button routerLink="/landing">Regresar</button>
+  <table mat-table [dataSource]="dataSource" class="pokemon-table mat-elevation-z8">
+    <!-- Nombre Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="header-cell"> Nombre </th>
+      <td mat-cell *matCellDef="let element" class="cell"> {{ element.name | replace | uppercase }} </td>
+    </ng-container>
+
+    <!-- URL Column -->
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef class="header-cell"> URL </th>
+      <td mat-cell *matCellDef="let element" class="cell">
+        <a [href]="element.url" target="_blank" class="pokemon-link">{{ element.url }}</a>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="header-cell"> Acciones </th>
+      <td mat-cell *matCellDef="let element" class="cell">
+        <button mat-raised-button color="primary" (click)="addToFavorites(element)">
+          <mat-icon>favorite</mat-icon> Favoritos
+        </button>
+        <button mat-button [routerLink]="['/pokemons', element.name]">Ver Detalles</button>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

@@ -1,0 +1,33 @@
+<button mat-raised-button color="primary" routerLink="/pokemons" >Regresar</button>
+<div *ngIf="error; else detailTemplate">
+    <h2>Pokémon no encontrado</h2>
+    <p>Lo sentimos, no se pudo encontrar el Pokémon que buscas.</p>
+  </div>
+  
+  <ng-template #detailTemplate>
+    <h2>{{ pokemon.name }}</h2>
+    <div>
+      <h3>Imágenes</h3>
+      <img [src]="pokemon?.sprites?.front_default" alt="{{ pokemon?.name }}" />
+      <img [src]="pokemon?.sprites?.back_default" alt="{{ pokemon?.name }}" />
+    </div>
+    
+    <div>
+      <h3>Habilidades</h3>
+      <ul>
+        <li *ngFor="let ability of pokemon?.abilities">
+          {{ ability.ability.name }}
+        </li>
+      </ul>
+    </div>
+    
+    <div>
+      <h3>Juegos</h3>
+      <ul>
+        <li *ngFor="let game of pokemon?.game_indices">
+          {{ game.version.name }}
+        </li>
+      </ul>
+    </div>
+  </ng-template>
+  
